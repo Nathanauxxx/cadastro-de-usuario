@@ -1,0 +1,36 @@
+.logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.logo mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 16px;
+  }
+
+  .user-info {
+    display: none;
+  }
+}

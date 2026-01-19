@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Usuário' : 'Novo Usuário' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" placeholder="Nome completo">
+      <mat-icon matPrefix>person</mat-icon>
+      <mat-error *ngIf="f['nome'].hasError('required')">
+        Nome é obrigatório
+      </mat-error>
+      <mat-error *ngIf="f['nome'].hasError('minlength')">
+        Nome deve ter no mínimo 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="f['nome'].hasError('maxlength')">
+        Nome deve ter no máximo 100 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="seu@email.com">
+      <mat-icon matPrefix>email</mat-icon>
+      <mat-error *ngIf="f['email'].hasError('required')">
+        Email é obrigatório
+      </mat-error>
+      <mat-error *ngIf="f['email'].hasError('email')">
+        Email inválido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput type="tel" formControlName="telefone" placeholder="(11) 99999-9999">
+      <mat-icon matPrefix>phone</mat-icon>
+      <mat-error *ngIf="f['telefone'].hasError('required')">
+        Telefone é obrigatório
+      </mat-error>
+      <mat-error *ngIf="f['telefone'].hasError('pattern')">
+        Telefone inválido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Senha {{ isEditMode ? '(deixe em branco para manter)' : '' }}</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" 
+             formControlName="senha" 
+             [placeholder]="isEditMode ? 'Nova senha (opcional)' : 'Sua senha'">
+      <mat-icon matPrefix>lock</mat-icon>
+      <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="f['senha'].hasError('required')">
+        Senha é obrigatória
+      </mat-error>
+      <mat-error *ngIf="f['senha'].hasError('minlength')">
+        Senha deve ter no mínimo 6 caracteres
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="loading">
+    Cancelar
+  </button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" 
+          [disabled]="loading || usuarioForm.invalid">
+    <mat-spinner *ngIf="loading" diameter="20" class="spinner-button"></mat-spinner>
+    <span *ngIf="!loading">{{ isEditMode ? 'Atualizar' : 'Criar' }}</span>
+  </button>
+</mat-dialog-actions>

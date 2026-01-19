@@ -1,0 +1,25 @@
+mat-dialog-content {
+  min-width: 500px;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  margin: 0;
+}
+
+.spinner-button {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  mat-dialog-content {
+    min-width: 100%;
+  }
+}
